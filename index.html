@@ -99,41 +99,128 @@
         .logo-image {
             width: 150px;
             margin: 30px 0; /* เว้นช่องไฟระหว่างกล่องบนกับกล่องล่าง */
+        
+    </style> 
+            <style>
+        /* ตั้งค่าพื้นฐาน */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ส่วนควบคุม (Control Panel) */
+        .control-panel {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* กรอบแสดงเว็บไซต์ (Showcase Frame) */
+        .web-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            overflow: hidden; /* บังคับให้มุมโค้งมน */
+            border: 1px solid #e1e4e8;
+        }
+
+        /* สไตล์ของ iframe */
+        .web-frame {
+            width: 100%;
+            height: 100%;
+            border: none; /* ลบเส้นขอบเดิมของ iframe */
         }
     </style>
 </head>
 <body>
 
+    <div class="control-panel">
+        <input type="text" id="urlInput" value="https://yoha-home.vercel.app/" placeholder="URL">
+        <button onclick="changeWebsite()">Letgo</button>
+    </div>
+
+    <div class="web-container">
+        <iframe 
+            id="myFrame" 
+            src="https://example.com" 
+            class="web-frame"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <script>
+        function changeWebsite() {
+            const urlInput = document.getElementById('urlInput').value;
+            const iframe = document.getElementById('myFrame');
+            
+            if (urlInput) {
+                // ตรวจสอบเบื้องต้นว่าผู้ใช้ใส่ http:// หรือ https:// หรือยัง
+                if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
+                    
+                    return;
+                }
+                iframe.src = urlInput;
+            }
+        }
+    </script>
+        
+    </script>
+    
+</head>
+<body>
+
    <div class="header-container">
        <h1 class="header-title">• yoha</h1>
-       <div class="app-launcher" title="แอป Yoha" onclick="alert('คุณคลิกเปิดหมู่แอป!')">
+       <div class="app-launcher" title="แอป Yoha" onclick="">
            <span></span><span></span><span></span>
            <span></span><span></span><span></span>
            <span></span><span></span><span></span>
        </div>
    </div>
    
-   <div class="input-group">
-       <input type="text" id="urlInput" placeholder="Url">
-       <button onclick="goToURL()">Letgo</button>
-   </div>
+  
 
-   <img src="logo.png" alt="Yoha Logo" class="logo-image">
-           
-   <form action="https://www.google.com/search" method="get" target="_blank" class="input-group">
-      <input type="text" name="q" placeholder="Search" required>
-      <button type="submit">Search</button>
-   </form>
-
-   <script>
-   function goToURL() {
-     var url = document.getElementById("urlInput").value;
-     if (!url.startsWith("http")) {
-       url = "https://" + url;
-     }
-     window.open(url, '_blank');
-   }
-   </script>
+   
+   
 
 </body>
 </html>
